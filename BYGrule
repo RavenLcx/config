@@ -1,0 +1,71 @@
+[custom]
+; 基础规则集
+ruleset=抖音,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/DouYin/DouYin.list
+ruleset=直连,https://raw.githubusercontent.com/qichiyuhub/rule/master/Direct.list
+ruleset=节点选择,https://raw.githubusercontent.com/qichiyuhub/rule/master/ProxyLite.list
+ruleset=AI,https://raw.githubusercontent.com/qichiyuhub/rule/master/AI.list
+ruleset=Bing,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Bing.list
+ruleset=OneDrive,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OneDrive/OneDrive.list
+ruleset=Microsoft,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list
+ruleset=Apple,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list
+ruleset=Netflix,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Netflix.list
+ruleset=Adobe,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/refs/heads/master/Clash/Ruleset/Adobe.list
+ruleset=节点选择,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list
+ruleset=直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list
+ruleset=直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.list
+ruleset=直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Download.list
+ruleset=直连,[]GEOSITE,CN
+ruleset=直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list
+ruleset=直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/SteamCN.list
+ruleset=直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list
+ruleset=直连,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/UnBan.list
+ruleset=节点选择,[]GEOSITE,geolocation-!cn
+ruleset=直连,[]GEOIP,CN,no-resolve
+ruleset=未匹配,[]FINAL
+
+
+; 主分组：节点选择（已移除家宽）
+custom_proxy_group=节点选择`select`[]香港自动`[]日本自动`[]美国自动`[]香港选择`[]日本选择`[]美国选择`[]手动切换`[]DIRECT
+
+; 手动切换所有节点
+custom_proxy_group=手动切换`select`.*
+
+; ------------------------
+; 自动及直连组（已移除家宽）
+; ------------------------
+
+custom_proxy_group=直连`select`[]节点选择`[]香港自动`[]日本自动`[]美国自动`[]手动切换`[]DIRECT
+custom_proxy_group=未匹配`select`[]节点选择`[]香港自动`[]日本自动`[]美国自动`[]手动切换`[]DIRECT
+
+; ✅ 正则统一：仅匹配 “🇭🇰 香港”
+custom_proxy_group=香港自动`url-test`(🇭🇰 香港)`http://www.gstatic.com/generate_204`300,,50
+custom_proxy_group=日本自动`url-test`(🇯🇵 日本)`http://www.gstatic.com/generate_204`300,,50
+custom_proxy_group=美国自动`url-test`(🇺🇸 美国)`http://www.gstatic.com/generate_204`300,,50
+
+; ------------------------
+; 手动选择分组（同样统一格式）
+; ------------------------
+
+custom_proxy_group=香港选择`select`(🇭🇰 香港)
+custom_proxy_group=日本选择`select`(🇯🇵 日本)
+custom_proxy_group=美国选择`select`(🇺🇸 美国)
+
+; ------------------------
+; 各服务专用分组（已移除家宽）
+; ------------------------
+
+custom_proxy_group=抖音`select`[]节点选择`[]香港自动`[]日本自动`[]美国自动`[]手动切换`[]DIRECT
+custom_proxy_group=AI`select`[]节点选择`[]香港自动`[]日本自动`[]美国自动`[]手动切换`[]DIRECT
+custom_proxy_group=Bing`select`[]节点选择`[]香港自动`[]日本自动`[]美国自动`[]手动切换`[]DIRECT
+custom_proxy_group=OneDrive`select`[]节点选择`[]香港自动`[]日本自动`[]美国自动`[]手动切换`[]DIRECT
+custom_proxy_group=Microsoft`select`[]节点选择`[]香港自动`[]日本自动`[]美国自动`[]手动切换`[]DIRECT
+custom_proxy_group=Apple`select`[]节点选择`[]香港自动`[]日本自动`[]美国自动`[]手动切换`[]DIRECT
+custom_proxy_group=Netflix`select`[]节点选择`[]香港自动`[]日本自动`[]美国自动`[]手动切换`[]DIRECT
+custom_proxy_group=Adobe`select`[]REJECT`[]节点选择`[]香港自动`[]日本自动`[]美国自动`[]手动切换`[]DIRECT
+
+; ------------------------
+; Clash 配置
+; ------------------------
+
+enable_rule_generator=true
+overwrite_original_rules=true
